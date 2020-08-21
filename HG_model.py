@@ -10,8 +10,8 @@ class HGModel(BaseModel):
     def name(self):
         return 'HGModel'
 
-    def __init__(self, opt):
-        BaseModel.initialize(self, opt)
+    def __init__(self, gpu_ids, isTrain, checkpoints_dir, name):
+        BaseModel.initialize(self, gpu_ids, isTrain, checkpoints_dir, name)
 
         print("===========================================LOADING Hourglass NETWORK====================================================")
         model = pytorch_DIW_scratch.pytorch_DIW_scratch

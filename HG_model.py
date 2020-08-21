@@ -13,12 +13,15 @@ class HGModel(BaseModel):
     def __init__(self, gpu_ids, isTrain, checkpoints_dir, name):
         BaseModel.initialize(self, gpu_ids, isTrain, checkpoints_dir, name)
 
-        print("===========================================LOADING Hourglass NETWORK====================================================")
+        print("======= LOADING Hourglass NETWORK =======")
         model = pytorch_DIW_scratch.pytorch_DIW_scratch
+        print("======= TO CUDA =======")
         model= torch.nn.parallel.DataParallel(model, device_ids = [0])#device_ids = [0,1]
         #model_parameters = self.load_network(model, 'G', 'best_vanila')
+        print("======= GET WEIGHTS =======")
         model_parameters = self.load_network(model, 'G', 'best_generalization')
         model.load_state_dict(model_parameters)
+        print("======= LAST =======")
         self.netG = model.cuda()
 
     def batch_classify(self, z_A_arr, z_B_arr, ground_truth ):

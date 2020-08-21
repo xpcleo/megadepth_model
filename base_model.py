@@ -5,12 +5,12 @@ class BaseModel():
     def name(self):
         return 'BaseModel'
 
-    def initialize(self, opt):
-        self.opt = opt
-        self.gpu_ids = opt.gpu_ids
-        self.isTrain = opt.isTrain
+    def initialize(self, gpu_ids, isTrain, checkpoints_dir, name):
+#         self.opt = opt
+        self.gpu_ids = gpu_ids
+        self.isTrain = isTrain
         self.Tensor = torch.cuda.FloatTensor if self.gpu_ids else torch.Tensor
-        self.save_dir = os.path.join(opt.checkpoints_dir, opt.name)
+        self.save_dir = os.path.join(checkpoints_dir, name)
 
     def set_input(self, input):
         self.input = input
